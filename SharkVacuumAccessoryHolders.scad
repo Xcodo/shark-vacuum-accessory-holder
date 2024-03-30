@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: 2024 Simon Redman <simon@ergotech.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only
+ */
+
 // The number of accessory holders to produce
 numAccessoryHolders = 2; // [1:10]
 
