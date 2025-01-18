@@ -204,6 +204,28 @@ module makeAccessoryHolder() {
     }
 }
 
+//warning: not parameterised!
+module makeCantedAccessoryHolder() {
+    difference() {
+        //move to compensate for rotation below
+        translate([0, 20, -10])
+        //rotate forward to give clearance for dust want
+        rotate([25, 0, 0])
+        makeAccessoryHolder();
+        
+        //remove parts which are now outside the envelope of the straight piece
+        union() {
+            //everything behind the wall pate
+            translate([0, 49, 0])
+            cube(50);
+            
+            //everything below the z origin
+            translate([0, 0, -50])
+            cube(50);
+        }
+    }
+}
+
 module makeWallPlate() {
   difference() {
     union() {
@@ -256,24 +278,12 @@ module makePart() {
     translate([i*(accessoryHolderSpacing), 0, 0])
     
     if (i==0) {
-        difference() {
-            translate([0, 20, -10])
-            rotate([25, 0, 0])
-            makeAccessoryHolder();
-            
-            union() {
-                translate([0, 49, 0])
-                // The main, back part of the wall plate
-                cube(50);
-                
-                translate([0, 0, -50])
-                // The main, back part of the wall plate
-                cube(50);
-            }
-        }
+        //this one is canted
+        makeCantedAccessoryHolder();
     }
     else
     {
+        //the rest are straight
         makeAccessoryHolder();
     }
   }
